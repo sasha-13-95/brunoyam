@@ -6,13 +6,12 @@ public class Easy1 {
     public static void main(String[] args) {
         System.out.println("Введите число и степень");
         Scanner scanner = new Scanner(System.in);
-        int a = scanner.nextInt();
-        int n = scanner.nextInt();
-        while (true) {
-            System.out.println("Результат = " + Math.pow(a, n));
-            System.out.println("Введите число и степень");
-            a = scanner.nextInt();
-            n = scanner.nextInt();
+        int num = scanner.nextInt();
+        int pow = scanner.nextInt();
+        int res = 1;
+        for (int i = 1; i <= pow; i++) {
+            res = res * num;
         }
+        System.out.println("Результат = " + res);
     }
 }
