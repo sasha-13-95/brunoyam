@@ -14,7 +14,7 @@ public class Middle4 {
             System.out.println("Факториал 0 = 1");
         } else {
             for (int i = 1; i <= n; i++) {
-                res = i * res;
+                res *= i;
             }
             System.out.println(res);
         }
