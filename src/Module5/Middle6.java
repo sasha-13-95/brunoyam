@@ -6,8 +6,8 @@ import java.util.Scanner;
 public class Middle6 {
     public static void main(String[] args) {
         for (int i = 0; i < 5; i++) {
-            int a = new Random().nextInt(8) + 1;
-            int b = new Random().nextInt(8) + 1;
+            int a = new Random().nextInt(1, 11);
+            int b = new Random().nextInt(1, 11);
             int result = a * b;
             System.out.printf("Решите пример: %d * %d\n", a, b);
             Scanner scan = new Scanner(System.in);
