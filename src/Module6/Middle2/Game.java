@@ -54,12 +54,18 @@ public class Game {
     private void computersMove() {
         int a;
         int b;
+        boolean correctInput = false;
         computerFigure = player.getComputerFigure();
-        do {
-            a = random.nextInt(3);
-            b = random.nextInt(3);
+        a = random.nextInt(3);
+        b = random.nextInt(3);
+        while (!correctInput) {
+            if (field[a][b] == 'X' || field[a][b] == '0') {
+                a = random.nextInt(3);
+                b = random.nextInt(3);
+            } else {
+                correctInput = true;
+            }
         }
-        while (field[a][b] == 'X' || field[a][b] == '0');
         if (field[a][b] == '?') {
             field[a][b] = computerFigure;
             System.out.println("Ход компьютера: ");

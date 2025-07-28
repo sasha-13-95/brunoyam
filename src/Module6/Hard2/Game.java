@@ -5,20 +5,15 @@ import java.util.Random;
 
 public class Game {
     static char[][] fieldOfComputer;
-    private boolean successfulMove;
     private boolean winnerFound;
-    private Player player;
-    Random random = new Random();
-    Field field = new Field();
+    private Player player = new Player();
 
-    public Game() {
-        player = new Player();
-    }
+    private Field field = new Field();
+    Random random = new Random();
 
     private void preparingForTheGame() {
         field.creatingAComputerField();
         fieldOfComputer = field.getField();
-        printComputerField();
         player.creatingAFieldOfPlayer();
     }
 
@@ -27,13 +22,13 @@ public class Game {
         while (true) {
             player.moveOfPlayer();
             searchForWinnerPlayer();
-            if (winnerFound == true) {
+            if (winnerFound) {
                 System.out.println("Игра закончена!");
                 break;
             }
             computerMove();
             searchForWinnerComputer();
-            if (winnerFound == true) {
+            if (winnerFound) {
                 System.out.println("Игра закончена!");
                 break;
             }
@@ -41,21 +36,28 @@ public class Game {
     }
 
     private void computerMove() {
-        int a;
-        int b;
-        do {
-            do {
-                System.out.println("Ход компьютера ");
-                a = random.nextInt(10);
-                b = random.nextInt(10);
+        int coordinateX;
+        int coordinateY;
+        boolean correctInput;
+        boolean successfulMove = true;
+        while (successfulMove) {
+            System.out.println("Ход компьютера ");
+            coordinateX = random.nextInt(10);
+            coordinateY = random.nextInt(10);
+            correctInput = false;
+            while (!correctInput) {
+                if (player.getFieldOfPlayer()[coordinateX][coordinateY] == '*' || player.getFieldOfPlayer()[coordinateX][coordinateY] == '2') {
+                    coordinateX = random.nextInt(10);
+                    coordinateY = random.nextInt(10);
+                } else {
+                    correctInput = true;
+                }
             }
-            while (player.getFieldOfPlayer()[a][b] == '*' || player.getFieldOfPlayer()[a][b] == '2');
-            if (player.getFieldOfPlayer()[a][b] == '1') {
-                player.getFieldOfPlayer()[a][b] = '2';
+            if (player.getFieldOfPlayer()[coordinateX][coordinateY] == '1') {
+                player.getFieldOfPlayer()[coordinateX][coordinateY] = '2';
                 System.out.println("Корабль подбит!");
-                successfulMove = true;
-            } else {
-                player.getFieldOfPlayer()[a][b] = '*';
+            } else if (player.getFieldOfPlayer()[coordinateX][coordinateY] == '0') {
+                player.getFieldOfPlayer()[coordinateX][coordinateY] = '*';
                 System.out.println("Мимо!");
                 successfulMove = false;
             }
@@ -71,18 +73,6 @@ public class Game {
                     }
                 }
             }
-        }
-        while (successfulMove == true);
-    }
-
-
-    static void printComputerField() {
-        System.out.println("Поле компьютера: ");
-        for (int i = 0; i < fieldOfComputer.length; i++) {
-            for (int j = 0; j < fieldOfComputer.length; j++) {
-                System.out.print(fieldOfComputer[i][j] + " ");
-            }
-            System.out.println();
         }
     }
 

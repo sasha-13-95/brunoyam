@@ -20,17 +20,21 @@ public class Player {
     }
 
     public void choosingAFigure() {
-        do {
-            System.out.println("Выбери, какой фигурой будешь играть: X или 0");
-            myFigure = scan.next().charAt(0);
+        boolean correctInput = false;
+        System.out.println("Выбери, какой фигурой будешь играть: X или 0");
+        myFigure = scan.next().charAt(0);
+        while (!correctInput) {
             if (myFigure != 88 & myFigure != 48) {
-                System.out.println("Некорректный символ");
+                System.out.println("Некорректный символ, попробуй снова");
+                myFigure = scan.next().charAt(0);
+            } else {
+                correctInput = true;
             }
-        } while (myFigure != 88 && myFigure != 48);
-        if (myFigure == 88) {
-            computerFigure = '0';
-        } else if (myFigure == 48) {
-            computerFigure = 'X';
+            if (myFigure == 88) {
+                computerFigure = '0';
+            } else if (myFigure == 48) {
+                computerFigure = 'X';
+            }
         }
     }
 
@@ -45,15 +49,19 @@ public class Player {
     public void playersMove() {
         int a;
         int b;
-        do {
-            System.out.println("Твой ход. Введи координаты ячейки (от 0 до 2)");
-            a = scan.nextInt();
-            b = scan.nextInt();
-            if (a < 0 || a >= field.length || b < 0 || b >= field.length) {
-                System.out.println("Некорректные данные");
+        boolean correctInput = false;
+        System.out.println("Твой ход. Введи координаты ячейки (от 0 до 2)");
+        a = scan.nextInt();
+        b = scan.nextInt();
+        while (!correctInput) {
+            if (a < 0 || a >= field.length || b < 0 || b >= field.length || field[a][b] == myFigure || field[a][b] == computerFigure) {
+                System.out.println("Некорректные данные, попробуй снова");
+                a = scan.nextInt();
+                b = scan.nextInt();
+            } else {
+                correctInput = true;
             }
-        } while (a < 0 || a >= field.length || b < 0 || b >= field.length ||
-                field[a][b] == myFigure || field[a][b] == computerFigure);
+        }
         field[a][b] = myFigure;
         System.out.println("Твой ход: ");
         for (int i = 0; i < field.length; i++) {

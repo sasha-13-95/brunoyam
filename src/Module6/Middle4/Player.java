@@ -21,14 +21,17 @@ public class Player {
     }
 
     public int playerMove() {
-        do {
-            System.out.println(name + ", введи число от 1 до 100");
-            playerNumber = scan.nextInt();
+        boolean correctInput = false;
+        System.out.println(name + ", введи число от 1 до 100");
+        playerNumber = scan.nextInt();
+        while (!correctInput) {
             if (playerNumber < 1 || playerNumber > 100) {
-                System.out.println("Некорректный ввод");
+                System.out.println("Некорректный ввод, попробуй снова");
+                playerNumber = scan.nextInt();
+            } else {
+                correctInput = true;
             }
         }
-        while (playerNumber < 1 || playerNumber > 100);
         return playerNumber;
     }
 

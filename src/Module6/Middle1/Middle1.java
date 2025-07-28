@@ -5,27 +5,27 @@ import java.util.Scanner;
 public class Middle1 {
     public static void main(String[] args) {
         String operation;
+        boolean correctInput = false;
         Scanner scan = new Scanner(System.in);
-        do {
-            System.out.print("Введите действие (+, или -, или *, или /): ");
-            operation = scan.nextLine();
+        System.out.print("Введите действие (+, или -, или *, или /): ");
+        operation = scan.nextLine();
+        while (!correctInput) {
             if (!operation.equals("+") && !operation.equals("-") && !operation.equals("*") && !operation.equals("/")) {
-                System.out.println("Вы ввели некорректное значение");
+                System.out.println("Вы ввели некорректное значение, попробуйте снова");
+                operation = scan.nextLine();
+            } else {
+                correctInput = true;
             }
-        } while (!operation.equals("+") && !operation.equals("-") && !operation.equals("*") && !operation.equals("/"));
+        }
         System.out.print("Введите первый аргумент: ");
         int firstNum = scan.nextInt();
         System.out.print("Введите второй аргумент: ");
         int secondNum = scan.nextInt();
-        if (operation.equals("+")) {
-            System.out.println("Результат: " + MathematicalOperations.addition(firstNum, secondNum));
-        } else if (operation.equals("-")) {
-            System.out.println("Результат: " + MathematicalOperations.subtraction(firstNum, secondNum));
-        } else if (operation.equals("*")) {
-            System.out.println("Результат: " + MathematicalOperations.multiplication(firstNum, secondNum));
-        } else if (operation.equals("/")) {
-            System.out.println("Результат: " + MathematicalOperations.division(firstNum, secondNum));
+        switch (operation) {
+            case "+" -> System.out.println("Результат: " + MathematicalOperations.addition(firstNum, secondNum));
+            case "-" -> System.out.println("Результат: " + MathematicalOperations.subtraction(firstNum, secondNum));
+            case "*" -> System.out.println("Результат: " + MathematicalOperations.multiplication(firstNum, secondNum));
+            case "/" -> System.out.println("Результат: " + MathematicalOperations.division(firstNum, secondNum));
         }
     }
 }
-
