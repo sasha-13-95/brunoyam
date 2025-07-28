@@ -2,14 +2,20 @@ package Module6.Hard2;
 
 import java.util.Scanner;
 
-import static Module6.Hard2.Game.fieldOfComputer;
-import static Module6.Hard2.Game.printComputerField;
+import static Module6.Hard2.Game.*;
 
 public class Player {
     private String name;
-    Field field = new Field();
-    private char[][] fieldOfPlayer = field.getField();
-    private boolean successfulMove;
+    private Field field1 = new Field();
+    private Field field2 = new Field();
+    private char[][] fieldOfPlayer = field1.getField();
+    private char[][] computerField = field2.getField();
+
+    private int coordinateX = 0;
+    private int coordinateY = 0;
+    private int coordinate[] = new int[2];
+
+
     Scanner scan = new Scanner(System.in);
 
     public Player() {
@@ -32,154 +38,167 @@ public class Player {
         }
     }
 
+    private void printComputerField() {
+        System.out.println("Поле компьютера: ");
+        for (int i = 0; i < computerField.length; i++) {
+            for (int j = 0; j < computerField.length; j++) {
+                System.out.print(computerField[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    private int[] correctInput(int coordinateX, int coordinateY) {
+        boolean correctInput = false;
+        while (!correctInput) {
+            if (coordinateX < 0 || coordinateX > 10 || coordinateY < 0 || coordinateY > 10) {
+                System.out.println("Некорректные данные, попробуй еще раз");
+                coordinateX = scan.nextInt();
+                coordinateY = scan.nextInt();
+            } else {
+                correctInput = true;
+            }
+        }
+        coordinate[0] = coordinateX;
+        coordinate[1] = coordinateY;
+        return coordinate;
+    }
+
 
     public void creatingAFieldOfPlayer() {
-        int a;
-        int b;
+        boolean correctLocation;
         for (int i = 1; i <= 4; i++) {
-            do {
-                System.out.println("Введи координаты " + i + " однопалубного корабля");
-                a = scan.nextInt();
-                b = scan.nextInt();
-                if (a < 0 || a > 10 || b < 0 || b > 10) {
-                    System.out.println("Некорректные данные");
-                }
-            }
-            while (a < 0 || a > 10 || b < 0 || b > 10);
-            if (fieldOfPlayer[a][b] == '1') {
-                do {
+            System.out.println("Введи координаты " + i + " однопалубного корабля");
+            coordinateX = scan.nextInt();
+            coordinateY = scan.nextInt();
+            correctInput(coordinateX, coordinateY);
+            coordinateX = coordinate[0];
+            coordinateY = coordinate[1];
+            correctLocation = false;
+            while (!correctLocation) {
+                if (fieldOfPlayer[coordinateX][coordinateY] == '1') {
                     System.out.println("Ты уже вводил эти координаты, попробуй снова");
-                    do {
-                        a = scan.nextInt();
-                        b = scan.nextInt();
-                        if (a < 0 || a > 10 || b < 0 || b > 10) {
-                            System.out.println("Некорректные данные");
-                        }
-                    }
-                    while (a < 0 || a > 10 || b < 0 || b > 10);
+                    coordinateX = scan.nextInt();
+                    coordinateY = scan.nextInt();
+                    correctInput(coordinateX, coordinateY);
+                    coordinateX = coordinate[0];
+                    coordinateY = coordinate[1];
+                } else {
+                    correctLocation = true;
                 }
-                while (fieldOfPlayer[a][b] == '1');
             }
-            fieldOfPlayer[a][b] = '1';
+            fieldOfPlayer[coordinateX][coordinateY] = '1';
+            printFieldOfPlayer();
+        }
+        for (int i = 1; i <= 3; i++) {
+            for (int j = 0; j < 2; j++) {
+                System.out.println("Введи координаты " + i + " двухпалубного корабля");
+                coordinateX = scan.nextInt();
+                coordinateY = scan.nextInt();
+                correctInput(coordinateX, coordinateY);
+                coordinateX = coordinate[0];
+                coordinateY = coordinate[1];
+                correctLocation = false;
+                while (!correctLocation) {
+                    if (fieldOfPlayer[coordinateX][coordinateY] == '1') {
+                        System.out.println("Ты уже вводил эти координаты, попробуй снова");
+                        coordinateX = scan.nextInt();
+                        coordinateY = scan.nextInt();
+                        correctInput(coordinateX, coordinateY);
+                        coordinateX = coordinate[0];
+                        coordinateY = coordinate[1];
+                    } else {
+                        correctLocation = true;
+                    }
+                }
+                fieldOfPlayer[coordinateX][coordinateY] = '1';
+            }
             printFieldOfPlayer();
         }
 
-        for (int i = 1; i <= 3; i++) {
-            for (int j = 0; j < 2; j++) {
-                do {
-                    System.out.println("Введи координаты " + i + " двухпалубного корабля");
-                    a = scan.nextInt();
-                    b = scan.nextInt();
-                    if (a < 0 || a > 10 || b < 0 || b > 10) {
-                        System.out.println("Некорректные данные");
-                    }
-                }
-                while (a < 0 || a > 10 || b < 0 || b > 10);
-                if (fieldOfPlayer[a][b] == '1') {
-                    do {
-                        System.out.println("Ты уже вводил эти координаты, попробуй снова");
-                        do {
-                            a = scan.nextInt();
-                            b = scan.nextInt();
-                            if (a < 0 || a > 10 || b < 0 || b > 10) {
-                                System.out.println("Некорректные данные");
-                            }
-                        }
-                        while (a < 0 || a > 10 || b < 0 || b > 10);
-                    } while (fieldOfPlayer[a][b] == '1');
-                }
-                fieldOfPlayer[a][b] = '1';
-                printFieldOfPlayer();
-            }
-        }
+
         for (int i = 1; i <= 2; i++) {
             for (int j = 0; j < 3; j++) {
-                do {
-                    System.out.println("Введи координаты " + i + " трёхпалубного корабля");
-                    a = scan.nextInt();
-                    b = scan.nextInt();
-                    if (a < 0 || a > 10 || b < 0 || b > 10) {
-                        System.out.println("Некорректные данные");
+                System.out.println("Введи координаты " + i + " трехпалубного корабля");
+                coordinateX = scan.nextInt();
+                coordinateY = scan.nextInt();
+                correctInput(coordinateX, coordinateY);
+                coordinateX = coordinate[0];
+                coordinateY = coordinate[1];
+                correctLocation = false;
+                while (!correctLocation) {
+                    if (fieldOfPlayer[coordinateX][coordinateY] == '1') {
+                        System.out.println("Ты уже вводил эти координаты, попробуй снова");
+                        coordinateX = scan.nextInt();
+                        coordinateY = scan.nextInt();
+                        correctInput(coordinateX, coordinateY);
+                        coordinateX = coordinate[0];
+                        coordinateY = coordinate[1];
+                    } else {
+                        correctLocation = true;
                     }
                 }
-                while (a < 0 || a > 10 || b < 0 || b > 10);
-                if (fieldOfPlayer[a][b] == '1') {
-                    do {
-                        System.out.println("Ты уже вводил эти координаты, попробуй снова");
-                        do {
-                            a = scan.nextInt();
-                            b = scan.nextInt();
-                            if (a < 0 || a > 10 || b < 0 || b > 10) {
-                                System.out.println("Некорректные данные");
-                            }
-                        }
-                        while (a < 0 || a > 10 || b < 0 || b > 10);
-                    } while (fieldOfPlayer[a][b] == '1');
-                }
-                fieldOfPlayer[a][b] = '1';
-                printFieldOfPlayer();
+                fieldOfPlayer[coordinateX][coordinateY] = '1';
             }
+            printFieldOfPlayer();
         }
 
         for (int i = 0; i < 4; i++) {
             System.out.println("Введи координаты четырёхпалубного корабля");
-            do {
-                a = scan.nextInt();
-                b = scan.nextInt();
-                if (a < 0 || a > 10 || b < 0 || b > 10) {
-                    System.out.println("Некорректные данные");
+            coordinateX = scan.nextInt();
+            coordinateY = scan.nextInt();
+            correctInput(coordinateX, coordinateY);
+            coordinateX = coordinate[0];
+            coordinateY = coordinate[1];
+            correctLocation = false;
+            while (!correctLocation) {
+                if (fieldOfPlayer[coordinateX][coordinateY] == '1') {
+                    System.out.println("Ты уже вводил эти координаты, попробуй снова");
+                    coordinateX = scan.nextInt();
+                    coordinateY = scan.nextInt();
+                    correctInput(coordinateX, coordinateY);
+                    coordinateX = coordinate[0];
+                    coordinateY = coordinate[1];
+                } else {
+                    correctLocation = true;
                 }
             }
-            while (a < 0 || a > 10 || b < 0 || b > 10);
-            if (fieldOfPlayer[a][b] == '1') {
-                do {
-                    System.out.println("Ты уже вводил эти координаты, попробуй снова");
-                    do {
-                        a = scan.nextInt();
-                        b = scan.nextInt();
-                        if (a < 0 || a > 10 || b < 0 || b > 10) {
-                            System.out.println("Некорректные данные");
-                        }
-                    }
-                    while (a < 0 || a > 10 || b < 0 || b > 10);
-                } while (fieldOfPlayer[a][b] == '1');
-            }
-            fieldOfPlayer[a][b] = '1';
-            printFieldOfPlayer();
+            fieldOfPlayer[coordinateX][coordinateY] = '1';
         }
+        printFieldOfPlayer();
     }
 
 
     public void moveOfPlayer() {
-        int a;
-        int b;
-        do {
+        boolean correctIntroduction;
+        boolean successfulMove = true;
+        while (successfulMove) {
             System.out.println("Твой ход, потопи корабли противника! Введи координаты (от 0 до 9):");
-            a = scan.nextInt();
-            b = scan.nextInt();
-            if (a < 0 || a > 10 || b < 0 || b > 10) {
-                System.out.println("Некорректные данные");
-            }
-            while (a < 0 || a > 10 || b < 0 || b > 10) ;
-            if (fieldOfComputer[a][b] == '*' || fieldOfComputer[a][b] == '2') {
-                do {
+            coordinateX = scan.nextInt();
+            coordinateY = scan.nextInt();
+            correctInput(coordinateX, coordinateY);
+            coordinateX = coordinate[0];
+            coordinateY = coordinate[1];
+            correctIntroduction = false;
+            while (!correctIntroduction) {
+                if (fieldOfComputer[coordinateX][coordinateY] == '*' || fieldOfComputer[coordinateX][coordinateY] == '2') {
                     System.out.println("Ты уже стрелял по этим координатам, попробуй снова");
-                    do {
-                        a = scan.nextInt();
-                        b = scan.nextInt();
-                        if (a < 0 || a > 10 || b < 0 || b > 10) {
-                            System.out.println("Некорректные данные");
-                        }
-                    }
-                    while (a < 0 || a > 10 || b < 0 || b > 10);
-                } while (fieldOfComputer[a][b] == '*' || fieldOfComputer[a][b] == '2');
+                    coordinateX = scan.nextInt();
+                    coordinateY = scan.nextInt();
+                    correctInput(coordinateX, coordinateY);
+                    coordinateX = coordinate[0];
+                    coordinateY = coordinate[1];
+                } else {
+                    correctIntroduction = true;
+                }
             }
-            if (fieldOfComputer[a][b] == '1') {
-                fieldOfComputer[a][b] = '2';
+            if (fieldOfComputer[coordinateX][coordinateY] == '1') {
+                fieldOfComputer[coordinateX][coordinateY] = '2';
+                computerField[coordinateX][coordinateY] = '2';
                 System.out.println("Корабль подбит!");
-                successfulMove = true;
             } else {
-                fieldOfComputer[a][b] = '*';
+                fieldOfComputer[coordinateX][coordinateY] = '*';
+                computerField[coordinateX][coordinateY] = '*';
                 System.out.println("Мимо!");
                 successfulMove = false;
             }
@@ -196,9 +215,7 @@ public class Player {
                 }
             }
         }
-        while (successfulMove == true);
     }
-
 
     public char[][] getFieldOfPlayer() {
         return fieldOfPlayer;

@@ -23,13 +23,17 @@ public class Player {
     }
 
     public void playersMove() {
-        do {
-            System.out.println("Убери от 1 до 3 палочек. Сколько палочек убрать?");
-            numberOfSticks = scan.nextInt();
+        boolean correctInput = false;
+        System.out.println("Убери от 1 до 3 палочек. Сколько палочек убрать?");
+        numberOfSticks = scan.nextInt();
+        while (!correctInput) {
             if (numberOfSticks < 1 || numberOfSticks > 3) {
-                System.out.println("Некорректный ввод");
+                System.out.println("Некорректный ввод, попробуй снова");
+                numberOfSticks = scan.nextInt();
+            } else {
+                correctInput = true;
             }
-        } while (numberOfSticks < 1 || numberOfSticks > 3);
+        }
         for (int i = 0; i < numberOfSticks; i++) {
             if (field[i].equals(" | ")) {
                 field[i] = " X ";
