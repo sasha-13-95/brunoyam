@@ -8,8 +8,8 @@ public class Game {
     private int maxNumberOfAttempts;
 
     private Player player = new Player();
-    Random random = new Random();
-    Scanner scan = new Scanner(System.in);
+    private Random random = new Random();
+    private Scanner scan = new Scanner(System.in);
 
     public void startGame() {
         System.out.println("Выбери режим игры: \n 1. Без ограничения количества попыток \n 2. С ограниченным количеством попыток");

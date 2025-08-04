@@ -8,8 +8,8 @@ public class Player {
     private static final int NUMBER_OF_CARDS = 4;
     private int card;
     private int[] playerCards = new int[NUMBER_OF_CARDS];
-    Scanner scan = new Scanner(System.in);
-    Random random = new Random();
+    private Scanner scan = new Scanner(System.in);
+    private Random random = new Random();
 
     public Player() {
         System.out.println("Введи свое имя");

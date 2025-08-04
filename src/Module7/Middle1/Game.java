@@ -5,7 +5,8 @@ import java.util.Scanner;
 public class Game {
     private Thimble thimble = new Thimble();
     private Player player = new Player();
-    Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
+    private static final int NUMBER_OF_VICTORIES = 3;
 
     private int correctInput(int answer) {
         boolean correctInput = false;
@@ -21,8 +22,8 @@ public class Game {
     }
 
     public void startGame() {
-        System.out.println("Введи номер наперстка (1,2 или 3)");
-        while (player.getWinCounter() != 3) {
+        while (player.getWinCounter() != NUMBER_OF_VICTORIES) {
+            System.out.println("Введи номер наперстка (1,2 или 3)");
             int answer = scanner.nextInt();
             answer = correctInput(answer);
             int realNumber = thimble.showNumberThimble();
