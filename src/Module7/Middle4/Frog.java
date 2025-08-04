@@ -5,7 +5,7 @@ import java.util.Random;
 public class Frog {
     private int jumpCount = 0;
     private int numberOfJumps;
-    Random random = new Random();
+    private Random random = new Random();
 
     private void countJumps(int numberOfJumps) {
         jumpCount = jumpCount + numberOfJumps;

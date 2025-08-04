@@ -6,7 +6,7 @@ public class Player {
     private String name;
     private int playerFigure;
     private int userValue;
-    Scanner scan = new Scanner(System.in);
+    private Scanner scan = new Scanner(System.in);
 
     public Player() {
         System.out.println("Введи свое имя");

@@ -5,7 +5,7 @@ import java.util.Random;
 public class Game {
     private int computerFigure;
     private Player player = new Player();
-    Random random = new Random();
+    private Random random = new Random();
 
 
     public void game() {

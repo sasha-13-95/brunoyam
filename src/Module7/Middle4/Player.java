@@ -6,7 +6,7 @@ public class Player {
     private String name;
     private Frog frog;
     private int jumpCount;
-    Scanner scan = new Scanner(System.in);
+    private Scanner scan = new Scanner(System.in);
 
     public Player() {
         System.out.println("Введи свое имя");
