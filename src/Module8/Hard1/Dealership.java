@@ -1,5 +1,7 @@
 package Module8.Hard1;
 
+import Module8.Hard1.Cars.*;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,6 +12,7 @@ public class Dealership {
     public static int numberOfCars = 0;
     private String action;
     private String carType;
+    private String carBrand;
     private boolean continueAction = true;
     private String answer;
     private boolean correctYesOrNo;
@@ -38,7 +41,7 @@ public class Dealership {
         correctYesOrNo = false;
         while (!correctYesOrNo) {
             System.out.println("Продолжить? Да / Нет");
-            answer = scan.nextLine();
+            answer = scan.next();
             if (answer.equals("Да") || answer.equals("да")) {
                 continueAction = true;
                 correctYesOrNo = true;
@@ -61,28 +64,28 @@ public class Dealership {
                     System.out.println("В нашем центре нет легковых авто");
                     break;
                 }
-                passengerCar.removeTheCar();
+                removeTheCar();
             }
             case "2" -> {
                 if (truck == null) {
                     System.out.println("В нашем центре нет грузовых авто");
                     break;
                 }
-                truck.removeTheCar();
+                removeTheCar();
             }
             case "3" -> {
                 if (bus == null) {
                     System.out.println("В нашем центре нет автобусов");
                     break;
                 }
-                bus.removeTheCar();
+                removeTheCar();
             }
             case "4" -> {
                 if (specializedEquipment == null) {
                     System.out.println("В нашем центре нет спец. техники");
                     break;
                 }
-                specializedEquipment.removeTheCar();
+                removeTheCar();
             }
             default -> System.out.println("Некорректный ввод");
         }
@@ -93,24 +96,28 @@ public class Dealership {
         carType = scan.nextLine();
         switch (carType) {
             case "1" -> {
+                System.out.println("Введите марку вашего легкового автомобиля и его стоимость");
                 passengerCar = new PassengerCar();
                 carPark.add(passengerCar);
-                passengerCar.addCar();
+                increaseTheNumberOfCars();
             }
             case "2" -> {
+                System.out.println("Введите марку вашего грузового автомобиля и его стоимость");
                 truck = new Truck();
                 carPark.add(truck);
-                truck.addCar();
+                increaseTheNumberOfCars();
             }
             case "3" -> {
+                System.out.println("Введите марку вашего автобуса и его стоимость");
                 bus = new Bus();
                 carPark.add(bus);
-                bus.addCar();
+                increaseTheNumberOfCars();
             }
             case "4" -> {
+                System.out.println("Введите марку вашей техники и ее стоимость");
                 specializedEquipment = new SpecializedEquipment();
                 carPark.add(specializedEquipment);
-                specializedEquipment.addCar();
+                increaseTheNumberOfCars();
             }
             default -> System.out.println("Некорректный ввод");
         }
@@ -140,5 +147,28 @@ public class Dealership {
             }
         }
         System.out.println(minPrice);
+    }
+
+    private void increaseTheNumberOfCars() {
+        numberOfCars++;
+        System.out.println("В нашем автопарке " + numberOfCars + " автомобиля(-ей)");
+    }
+
+    private void removeTheCar() {
+        boolean foundACar = false;
+        System.out.println("Какую марку авто вы хотите купить?");
+        carBrand = scan.next();
+        for (int i = 0; i < carPark.size(); i++) {
+            if (carBrand.equals(carPark.get(i).getBrand())) {
+                System.out.println("Поздравляем! Вы купили " + carBrand);
+                carPark.remove(i);
+                numberOfCars--;
+                foundACar = true;
+            }
+        }
+        if (!foundACar) {
+            System.out.println("У нас нет данной марки авто.");
+        }
+        System.out.println("В нашем автопарке " + numberOfCars + " автомобиля(-ей)");
     }
 }
