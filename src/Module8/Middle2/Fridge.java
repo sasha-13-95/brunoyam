@@ -1,15 +1,17 @@
 package Module8.Middle2;
 
+import Module8.Middle2.Products.*;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 
 public class Fridge {
     private ArrayList<Product> products = new ArrayList<>();
-    public static int remainingSpace = 100;
-    public static boolean freeSpace = true;
+    private int remainingSpace = 100;
+    private boolean freeSpace = true;
     private int quantityOfProduction = 0;
-    String productName;
+    private String productName;
     private Bread bread;
     private Cucumber cucumber;
     private Milk milk;
@@ -23,7 +25,7 @@ public class Fridge {
             switch (productName) {
                 case "1" -> {
                     bread = new Bread();
-                    bread.putInFrige(bread.getProductName(), bread.getProductVolume());
+                    putInFrige(bread);
                     if (!freeSpace) {
                         break;
                     }
@@ -32,7 +34,7 @@ public class Fridge {
                 }
                 case "2" -> {
                     cucumber = new Cucumber();
-                    cucumber.putInFrige(cucumber.getProductName(), cucumber.getProductVolume());
+                    putInFrige(cucumber);
                     if (!freeSpace) {
                         break;
                     }
@@ -41,7 +43,7 @@ public class Fridge {
                 }
                 case "3" -> {
                     milk = new Milk();
-                    milk.putInFrige(milk.getProductName(), milk.getProductVolume());
+                    putInFrige(milk);
                     if (!freeSpace) {
                         break;
                     }
@@ -50,7 +52,7 @@ public class Fridge {
                 }
                 case "4" -> {
                     sausage = new Sausage();
-                    sausage.putInFrige(sausage.getProductName(), sausage.getProductVolume());
+                    putInFrige(sausage);
                     if (!freeSpace) {
                         break;
                     }
@@ -60,5 +62,19 @@ public class Fridge {
             }
         }
         System.out.println("В холодильнике " + quantityOfProduction + " продукта(-ов)");
+    }
+
+    private boolean putInFrige(Product product) {
+        if (remainingSpace - product.getVolume() < 0) {
+            remainingSpace -= product.getVolume();
+            System.out.println("Места в холодильнике больше нет");
+            freeSpace = false;
+        }
+        if (remainingSpace - product.getVolume() >= 0) {
+            System.out.println("Ты выбрал " + product.getName() + ", он занимает " + product.getVolume() + " % объема");
+            remainingSpace -= product.getVolume();
+            System.out.println("Осталось " + remainingSpace + " % объема холодильника");
+        }
+        return freeSpace;
     }
 }

@@ -1,8 +1,8 @@
-package Module8.Middle3;
+package Module8.Middle3.Exercises;
 
 import java.util.Scanner;
 
-public class Running extends Exercises {
+public class Running extends Exercise {
     private Scanner scanner = new Scanner(System.in);
 
     public void kcalCounting(int weight, int minutes) {

@@ -1,14 +1,16 @@
 package Module8.Middle1;
 
 
+import Module8.Middle1.Materials.*;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 
 public class Library {
     private Scanner scan = new Scanner(System.in);
-    public static int quantityOfMaterials = 0;
-    public static ArrayList<Material> materials = new ArrayList<>();
+    private int quantityOfMaterials = 0;
+    private ArrayList<Material> materials = new ArrayList<>();
     private Material book;
     private Material magazine;
     private Material newspaper;
@@ -18,6 +20,7 @@ public class Library {
     private String material;
     private String action;
     private String answer;
+    private String titleOfTheGivenOutMaterial;
 
     public void libraryWork() {
         while (continueAction) {
@@ -59,28 +62,32 @@ public class Library {
                     System.out.println("В библиотеке нет никаких книг");
                     break;
                 }
-                book.giveAwayTheMaterial();
+                System.out.println("Какую книгу вы хотите взять?");
+                giveAwayTheMaterial();
             }
             case "2" -> {
                 if (newspaper == null) {
                     System.out.println("В библиотеке нет никаких газет");
                     break;
                 }
-                newspaper.giveAwayTheMaterial();
+                System.out.println("Какую газету вы хотите взять?");
+                giveAwayTheMaterial();
             }
             case "3" -> {
                 if (magazine == null) {
                     System.out.println("В библиотеке нет никаких журналов");
                     break;
                 }
-                magazine.giveAwayTheMaterial();
+                System.out.println("Какой журнал вы хотите взять?");
+                giveAwayTheMaterial();
             }
             case "4" -> {
                 if (scientificWork == null) {
                     System.out.println("В библиотеке нет никаких научных трудов");
                     break;
                 }
-                scientificWork.giveAwayTheMaterial();
+                System.out.println("Какую научную работу вы хотите взять?");
+                giveAwayTheMaterial();
             }
             default -> System.out.println("Введены некорректные данные");
         }
@@ -91,26 +98,56 @@ public class Library {
         material = scan.nextLine();
         switch (material) {
             case "1" -> {
+                System.out.println("Какую книгу вы хотите отдать?");
                 book = new Book();
                 materials.add(book);
-                book.addMaterial();
+                System.out.println("В библиотеку возвращена книга " + book.getTitleOfMaterial());
+                addQuantityOfMaterials();
             }
             case "2" -> {
+                System.out.println("Какую газету вы хотите отдать?");
                 newspaper = new Newspaper();
                 materials.add(newspaper);
-                newspaper.addMaterial();
+                System.out.println("В библиотеку возвращена газета " + newspaper.getTitleOfMaterial());
+                addQuantityOfMaterials();
             }
             case "3" -> {
+                System.out.println("Какой журнал вы хотите отдать?");
                 magazine = new Magazine();
                 materials.add(magazine);
-                magazine.addMaterial();
+                System.out.println("В библиотеку возвращен журнал " + magazine.getTitleOfMaterial());
+                addQuantityOfMaterials();
             }
             case "4" -> {
+                System.out.println("Какой научный труд вы хотите отдать?");
                 scientificWork = new ScientificWork();
                 materials.add(scientificWork);
-                scientificWork.addMaterial();
+                System.out.println("В библиотеку возвращена научная работа " + scientificWork.getTitleOfMaterial());
+                addQuantityOfMaterials();
             }
             default -> System.out.println("Введены некорректные данные");
         }
+    }
+
+    private void addQuantityOfMaterials() {
+        quantityOfMaterials++;
+        System.out.println("В библиотеке хранится " + quantityOfMaterials + " материала(-ов)");
+    }
+
+    private void giveAwayTheMaterial() {
+        boolean foundAMaterial = false;
+        titleOfTheGivenOutMaterial = scan.nextLine();
+        for (int i = 0; i < materials.size(); i++) {
+            if (titleOfTheGivenOutMaterial.equals(materials.get(i).getTitleOfMaterial())) {
+                System.out.println("Выдаем " + titleOfTheGivenOutMaterial);
+                materials.remove(i);
+                quantityOfMaterials--;
+                foundAMaterial = true;
+            }
+        }
+        if (!foundAMaterial) {
+            System.out.println("В библиотеке нет " + titleOfTheGivenOutMaterial);
+        }
+        System.out.println("В библиотеке хранится " + quantityOfMaterials + " материала(-ов)");
     }
 }

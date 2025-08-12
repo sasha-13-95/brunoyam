@@ -1,10 +1,9 @@
-package Module8.Middle3;
+package Module8.Middle3.Exercises;
+
 
 import java.util.Scanner;
 
-public class Swimming extends Exercises {
-    private static final float METABOLIC_RATE = 3.5f; // Константа, представляющая собой скорость метаболизма
-    private static final int CONVERSION_FACTOR = 200; // Константа, представляющая собой коэффициент перевода в килокалории
+public class Swimming extends Exercise {
     private float met; // Коэффициент MET (метаболический эквивалент)
     private float numberOfKcal;
     private boolean correctInput;

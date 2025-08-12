@@ -1,31 +1,49 @@
 package Module8.Middle3;
 
+import Module8.Middle3.Exercises.Exercise;
+import Module8.Middle3.Exercises.JumpingRope;
+import Module8.Middle3.Exercises.Running;
+import Module8.Middle3.Exercises.Swimming;
+
 import java.util.Scanner;
 
 public class WorkoutCalculator {
-    private Exercises jumpingRope = new JumpingRope();
-    private Exercises running = new Running();
-    private Exercises swimming = new Swimming();
+    private Exercise exercise;
+    private int minutes;
+    private int weight;
     private Scanner scanner = new Scanner(System.in);
 
-    public void count() {
+    public void count(Exercise exercise) {
+        if (exercise instanceof Running) {
+            exercise.kcalCounting(weight, minutes);
+        }
+        if (exercise instanceof JumpingRope) {
+            exercise.kcalCounting(weight, minutes);
+        }
+        if (exercise instanceof Swimming) {
+            exercise.kcalCounting(weight, minutes);
+        }
+    }
+
+    public void calculatorWork() {
         System.out.println("Введи название упражнения\n Введи 1, если бег \n       2, если прыжки со скакалкой\n       3, если плаванье");
         String typeOfExercise = scanner.nextLine();
         System.out.println("Введи количество минут");
-        int minutes = scanner.nextInt();
+        minutes = scanner.nextInt();
         System.out.println("Какой у тебя вес?");
-        int weight = scanner.nextInt();
+        weight = scanner.nextInt();
         switch (typeOfExercise) {
             case "1" -> {
-                running.kcalCounting(weight, minutes);
+                exercise = new Running();
             }
             case "2" -> {
-                jumpingRope.kcalCounting(weight, minutes);
+                exercise = new JumpingRope();
             }
             case "3" -> {
-                swimming.kcalCounting(weight, minutes);
+                exercise = new Swimming();
             }
             default -> System.out.println("Некорректные данные");
         }
+        count(exercise);
     }
 }
