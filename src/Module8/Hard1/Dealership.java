@@ -25,7 +25,7 @@ public class Dealership {
         System.out.println("Добро пожаловать  в наш диллерский центр!");
         while (continueAction) {
             System.out.println("Вы хотите приобрести или продать авто?\n Введите 1, если приобрести \n         2, если продать");
-            action = scan.nextLine();
+            action = scan.next();
             switch (action) {
                 case "1" -> buyACar();
                 case "2" -> sellTheCar();
@@ -55,45 +55,53 @@ public class Dealership {
         }
     }
 
-    private void buyACar() {
+    public void buyACar() {
         System.out.println("Какой тип авто Вас интересует\n Введите 1, если легковой автомобиль \n         2, если грузовой автомобиль\n         3, если автобус \n         4, если специализированная техника");
-        carType = scan.nextLine();
+        carType = scan.next();
         switch (carType) {
             case "1" -> {
                 if (passengerCar == null) {
                     System.out.println("В нашем центре нет легковых авто");
                     break;
                 }
-                removeTheCar();
+                System.out.println("Какую марку авто вы хотите купить?");
+                carBrand = scan.next();
+                removeTheCar(carBrand);
             }
             case "2" -> {
                 if (truck == null) {
                     System.out.println("В нашем центре нет грузовых авто");
                     break;
                 }
-                removeTheCar();
+                System.out.println("Какую марку авто вы хотите купить?");
+                carBrand = scan.next();
+                removeTheCar(carBrand);
             }
             case "3" -> {
                 if (bus == null) {
                     System.out.println("В нашем центре нет автобусов");
                     break;
                 }
-                removeTheCar();
+                System.out.println("Какую марку авто вы хотите купить?");
+                carBrand = scan.next();
+                removeTheCar(carBrand);
             }
             case "4" -> {
                 if (specializedEquipment == null) {
                     System.out.println("В нашем центре нет спец. техники");
                     break;
                 }
-                removeTheCar();
+                System.out.println("Какую марку авто вы хотите купить?");
+                carBrand = scan.next();
+                removeTheCar(carBrand);
             }
             default -> System.out.println("Некорректный ввод");
         }
     }
 
-    private void sellTheCar() {
-        System.out.println("Какой автомобиль Вы хотите продать \n Введите 1, если легковой автомобиль \n         2, если грузовой автомобиль\n         3, если автобус \n         4, если специализированная техника");
-        carType = scan.nextLine();
+    public void sellTheCar() {
+        System.out.println("Какой автомобиль Вы хотите продать \nВведите  1, если легковой автомобиль \n         2, если грузовой автомобиль\n         3, если автобус \n         4, если специализированная техника");
+        carType = scan.next();
         switch (carType) {
             case "1" -> {
                 System.out.println("Введите марку вашего легкового автомобиля и его стоимость");
@@ -123,7 +131,7 @@ public class Dealership {
         }
     }
 
-    public void provisionOfInformation() {
+    private void provisionOfInformation() {
         System.out.println("В нашем диллерском центре имеются автомобили: ");
         for (int i = 0; i < carPark.size(); i++) {
             System.out.println(carPark.get(i).getBrand() + " ");
@@ -154,10 +162,8 @@ public class Dealership {
         System.out.println("В нашем автопарке " + numberOfCars + " автомобиля(-ей)");
     }
 
-    private void removeTheCar() {
+    private void removeTheCar(String carBrand) {
         boolean foundACar = false;
-        System.out.println("Какую марку авто вы хотите купить?");
-        carBrand = scan.next();
         for (int i = 0; i < carPark.size(); i++) {
             if (carBrand.equals(carPark.get(i).getBrand())) {
                 System.out.println("Поздравляем! Вы купили " + carBrand);

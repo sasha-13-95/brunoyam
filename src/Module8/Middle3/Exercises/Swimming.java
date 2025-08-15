@@ -9,7 +9,7 @@ public class Swimming extends Exercise {
     private boolean correctInput;
     private Scanner scanner = new Scanner(System.in);
 
-    public void kcalCounting(int weight, int minutes) {
+    public float kcalCounting(int weight, int minutes) {
         while (!correctInput) {
             System.out.println("Каким стилем ты плавал?\n Введи 1, если брасс \n       2, если кроль\n       3, если баттерфляй");
             String swimmingStyle = scanner.nextLine();
@@ -34,9 +34,7 @@ public class Swimming extends Exercise {
                     correctInput = false;
                 }
             }
-            if (correctInput) {
-                System.out.println("За " + minutes + " минут ты потерял " + numberOfKcal + " ккал.");
-            }
         }
+        return numberOfKcal;
     }
 }
