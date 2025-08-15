@@ -53,7 +53,7 @@ public class Library {
         }
     }
 
-    private void takeTheMaterial() {
+    public void takeTheMaterial() {
         System.out.println("Что вы хотите взять? \n Введите 1, если книгу \n         2, если газету \n         3, если журнал \n         4, если научные труды");
         material = scan.nextLine();
         switch (material) {
@@ -63,7 +63,8 @@ public class Library {
                     break;
                 }
                 System.out.println("Какую книгу вы хотите взять?");
-                giveAwayTheMaterial();
+                titleOfTheGivenOutMaterial = scan.nextLine();
+                giveAwayTheMaterial(titleOfTheGivenOutMaterial);
             }
             case "2" -> {
                 if (newspaper == null) {
@@ -71,7 +72,8 @@ public class Library {
                     break;
                 }
                 System.out.println("Какую газету вы хотите взять?");
-                giveAwayTheMaterial();
+                titleOfTheGivenOutMaterial = scan.nextLine();
+                giveAwayTheMaterial(titleOfTheGivenOutMaterial);
             }
             case "3" -> {
                 if (magazine == null) {
@@ -79,7 +81,8 @@ public class Library {
                     break;
                 }
                 System.out.println("Какой журнал вы хотите взять?");
-                giveAwayTheMaterial();
+                titleOfTheGivenOutMaterial = scan.nextLine();
+                giveAwayTheMaterial(titleOfTheGivenOutMaterial);
             }
             case "4" -> {
                 if (scientificWork == null) {
@@ -87,13 +90,14 @@ public class Library {
                     break;
                 }
                 System.out.println("Какую научную работу вы хотите взять?");
-                giveAwayTheMaterial();
+                titleOfTheGivenOutMaterial = scan.nextLine();
+                giveAwayTheMaterial(titleOfTheGivenOutMaterial);
             }
             default -> System.out.println("Введены некорректные данные");
         }
     }
 
-    private void returnOfMaterial() {
+    public void returnOfMaterial() {
         System.out.println("Что вы хотите сдать? \n Введите 1, если книгу \n         2, если газету \n         3, если журнал \n         4, если научные труды");
         material = scan.nextLine();
         switch (material) {
@@ -134,9 +138,8 @@ public class Library {
         System.out.println("В библиотеке хранится " + quantityOfMaterials + " материала(-ов)");
     }
 
-    private void giveAwayTheMaterial() {
+    private void giveAwayTheMaterial(String titleOfTheGivenOutMaterial) {
         boolean foundAMaterial = false;
-        titleOfTheGivenOutMaterial = scan.nextLine();
         for (int i = 0; i < materials.size(); i++) {
             if (titleOfTheGivenOutMaterial.equals(materials.get(i).getTitleOfMaterial())) {
                 System.out.println("Выдаем " + titleOfTheGivenOutMaterial);

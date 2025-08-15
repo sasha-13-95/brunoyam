@@ -8,42 +8,28 @@ import Module8.Middle3.Exercises.Swimming;
 import java.util.Scanner;
 
 public class WorkoutCalculator {
-    private Exercise exercise;
-    private int minutes;
-    private int weight;
     private Scanner scanner = new Scanner(System.in);
 
-    public void count(Exercise exercise) {
-        if (exercise instanceof Running) {
-            exercise.kcalCounting(weight, minutes);
-        }
-        if (exercise instanceof JumpingRope) {
-            exercise.kcalCounting(weight, minutes);
-        }
-        if (exercise instanceof Swimming) {
-            exercise.kcalCounting(weight, minutes);
-        }
-    }
-
-    public void calculatorWork() {
-        System.out.println("Введи название упражнения\n Введи 1, если бег \n       2, если прыжки со скакалкой\n       3, если плаванье");
-        String typeOfExercise = scanner.nextLine();
-        System.out.println("Введи количество минут");
-        minutes = scanner.nextInt();
-        System.out.println("Какой у тебя вес?");
-        weight = scanner.nextInt();
+    public float calculatorWork(String typeOfExercise, int minutes, int weight) {
+        float numberOfKcal;
         switch (typeOfExercise) {
             case "1" -> {
-                exercise = new Running();
+                Exercise exercise = new Running();
+                numberOfKcal = exercise.kcalCounting(weight, minutes);
             }
             case "2" -> {
-                exercise = new JumpingRope();
+                Exercise exercise = new JumpingRope();
+                numberOfKcal = exercise.kcalCounting(weight, minutes);
             }
             case "3" -> {
-                exercise = new Swimming();
+                Exercise exercise = new Swimming();
+                numberOfKcal = exercise.kcalCounting(weight, minutes);
             }
-            default -> System.out.println("Некорректные данные");
+            default -> {
+                System.out.println("Некорректные данные");
+                numberOfKcal = 0;
+            }
         }
-        count(exercise);
+        return numberOfKcal;
     }
 }

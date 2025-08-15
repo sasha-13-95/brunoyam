@@ -64,7 +64,7 @@ public class Fridge {
         System.out.println("В холодильнике " + quantityOfProduction + " продукта(-ов)");
     }
 
-    private boolean putInFrige(Product product) {
+    public boolean putInFrige(Product product) {
         if (remainingSpace - product.getVolume() < 0) {
             remainingSpace -= product.getVolume();
             System.out.println("Места в холодильнике больше нет");

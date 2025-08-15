@@ -4,11 +4,12 @@ import java.util.Scanner;
 
 public class Running extends Exercise {
     private Scanner scanner = new Scanner(System.in);
+    private static final float INTENSITY_FACTOR = 1.2f; // взяла коэффициент среднего бега.
 
-    public void kcalCounting(int weight, int minutes) {
+    public float kcalCounting(int weight, int minutes) {
         System.out.println("Сколько километров ты пробежал?");
-        int kilometers = scanner.nextInt();
-        int numberOfKcal = weight * kilometers;
-        System.out.println("За " + minutes + " минут ты потерял " + numberOfKcal + " ккал.");
+        float kilometer = scanner.nextFloat();
+        float numberOfKcal = (kilometer / minutes * 60) * weight * INTENSITY_FACTOR;
+        return numberOfKcal;
     }
 }
