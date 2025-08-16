@@ -103,28 +103,28 @@ public class Library {
         switch (material) {
             case "1" -> {
                 System.out.println("Какую книгу вы хотите отдать?");
-                book = new Book();
+                book = new Book(scan.nextLine());
                 materials.add(book);
                 System.out.println("В библиотеку возвращена книга " + book.getTitleOfMaterial());
                 addQuantityOfMaterials();
             }
             case "2" -> {
                 System.out.println("Какую газету вы хотите отдать?");
-                newspaper = new Newspaper();
+                newspaper = new Newspaper(scan.nextLine());
                 materials.add(newspaper);
                 System.out.println("В библиотеку возвращена газета " + newspaper.getTitleOfMaterial());
                 addQuantityOfMaterials();
             }
             case "3" -> {
                 System.out.println("Какой журнал вы хотите отдать?");
-                magazine = new Magazine();
+                magazine = new Magazine(scan.nextLine());
                 materials.add(magazine);
                 System.out.println("В библиотеку возвращен журнал " + magazine.getTitleOfMaterial());
                 addQuantityOfMaterials();
             }
             case "4" -> {
                 System.out.println("Какой научный труд вы хотите отдать?");
-                scientificWork = new ScientificWork();
+                scientificWork = new ScientificWork(scan.nextLine());
                 materials.add(scientificWork);
                 System.out.println("В библиотеку возвращена научная работа " + scientificWork.getTitleOfMaterial());
                 addQuantityOfMaterials();

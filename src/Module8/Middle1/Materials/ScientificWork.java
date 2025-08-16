@@ -3,7 +3,7 @@ package Module8.Middle1.Materials;
 
 public class ScientificWork extends Material {
 
-    public ScientificWork() {
-        super();
+    public ScientificWork(String title) {
+        super(title);
     }
 }
