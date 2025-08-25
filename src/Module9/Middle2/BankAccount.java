@@ -16,4 +16,8 @@ public class BankAccount {
     public String getAccountNumber() {
         return accountNumber;
     }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
 }
