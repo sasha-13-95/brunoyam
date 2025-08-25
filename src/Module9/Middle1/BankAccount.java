@@ -11,7 +11,7 @@ public class BankAccount {
         if (balance - money < 0) {
             System.out.println("Операция не выполнена, на карте недостаточно средств");
         }
-        if (balance - money > 0) {
+        if (balance - money >= 0) {
             balance -= money;
             System.out.println("Операция выполнена, на карте " + balance);
         }

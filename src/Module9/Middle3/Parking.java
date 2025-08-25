@@ -8,16 +8,8 @@ public class Parking {
     private Scanner scanner = new Scanner(System.in);
     private Random random = new Random();
     private static final int MAX_NUMBER_OF_SEATS = 20;
-    private int numberOfSeats = MAX_NUMBER_OF_SEATS;
+    private static int numberOfSeats = MAX_NUMBER_OF_SEATS;
     private ArrayList<Car> cars;
-    private boolean correctYesOrNo;
-    private String answer;
-    private boolean continueAction = true;
-    private String carBrand;
-    private String id;
-    private boolean correctId;
-    private boolean carFound;
-    private String action;
 
     public Parking() {
         System.out.println("Добро пожаловать на парковку. Сейчас у нас " + MAX_NUMBER_OF_SEATS + " свободных мест");
@@ -25,14 +17,14 @@ public class Parking {
     }
 
     public void parkingIsWorking() {
+        boolean continueAction = true;
         while (continueAction) {
             System.out.println("Какое действие ты хочешь совершить? Введи 1, если поставить машину на парковку\n                                          2, если забрать машину с парковки");
-            action = scanner.nextLine();
+            String action = scanner.nextLine();
             switch (action) {
                 case "1" -> {
                     System.out.println("Какую машину ты хочешь поставить на парковку?");
-                    carBrand = scanner.nextLine();
-                    pop(carBrand);
+                    pop(scanner.nextLine());
                 }
                 case "2" -> {
                     if (cars.size() == 0) {
@@ -40,23 +32,24 @@ public class Parking {
                         break;
                     }
                     System.out.println("Какую машину ты хочешь забрать с парковки?");
-                    carBrand = scanner.nextLine();
+                    String carBrand = scanner.nextLine();
                     System.out.println("Введи id своей машины");
-                    id = scanner.nextLine();
+                    String id = scanner.nextLine();
                     push(carBrand, id);
                 }
                 default -> System.out.println("Некорректное значение");
             }
             System.out.println("На парковке осталось " + numberOfSeats + " мест");
-            correctYesOrNo();
+            continueAction = correctYesOrNo();
         }
     }
 
-    private void correctYesOrNo() {
-        correctYesOrNo = false;
+    private boolean correctYesOrNo() {
+        boolean correctYesOrNo = false;
+        boolean continueAction = false;
         while (!correctYesOrNo) {
             System.out.println("Продолжить? Да / Нет");
-            answer = scanner.nextLine();
+            String answer = scanner.nextLine();
             if (answer.equals("Да") || answer.equals("да")) {
                 continueAction = true;
                 correctYesOrNo = true;
@@ -68,9 +61,11 @@ public class Parking {
                 correctYesOrNo = false;
             }
         }
+        return continueAction;
     }
 
     private boolean checkCorrectId(String id) {
+        boolean correctId = false;
         for (int i = 0; i < cars.size(); i++) {
             if (!id.equals(cars.get(i).getId())) {
                 correctId = true;
@@ -89,7 +84,8 @@ public class Parking {
         }
         Car car = new Car(carBrand);
         cars.add(car);
-        correctId = false;
+        boolean correctId = false;
+        String id = null;
         while (!correctId) {
             id = String.valueOf(random.nextInt(1, 21));
             correctId = checkCorrectId(id);
@@ -100,7 +96,7 @@ public class Parking {
     }
 
     public void push(String carBrand, String id) {
-        carFound = false;
+        boolean carFound = false;
         for (int i = 0; i < cars.size(); i++) {
             if (carBrand.equals(cars.get(i).getCarBrand()) && id.equals(cars.get(i).getId())) {
                 cars.remove(i);
