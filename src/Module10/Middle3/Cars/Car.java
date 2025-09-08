@@ -3,11 +3,11 @@ package Module10.Middle3.Cars;
 import java.time.LocalDate;
 
 public abstract class Car implements CarInterface {
-    private int year;
     public static final int MAX_AGE = 20;
-    private double mileage;
     public static final int MAX_MILEAGE = 10000;
     private int coefficient;
+    private int year;
+    private double mileage;
 
     public Car(int year, double mileage) {
         this.year = year;
@@ -15,7 +15,7 @@ public abstract class Car implements CarInterface {
     }
 
     @Override
-    public int ageCalculation(int year) {
+    public int ageCalculation() {
         LocalDate localDate = LocalDate.now();
         int age = localDate.getYear() - year;
         return age;
