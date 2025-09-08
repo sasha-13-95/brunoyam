@@ -4,17 +4,15 @@ import Module10.Middle3.Cars.*;
 
 import java.util.Scanner;
 
-import static Module10.Middle3.Calculator.calculationOfTheAmount;
-
 public class CarPark {
     private Scanner scanner = new Scanner(System.in);
-    private int maxNumberOfCars = 10;
+    private static final int MAX_NUMBER_OF_CARS = 10;
     private Car[] cars;
     private Car car;
 
     public CarPark() {
         System.out.println("Добро пожаловать в наш автопарк! У нас в наличии 10 авто");
-        cars = new Car[maxNumberOfCars];
+        cars = new Car[MAX_NUMBER_OF_CARS];
         cars[0] = new Bmw(2025, 8500);
         cars[1] = new Bugatti(2024, 5000);
         cars[2] = new Jaguar(2023, 4000);
@@ -33,13 +31,10 @@ public class CarPark {
         if (car == null) {
             System.out.println("Такой машины в прокате нет");
         } else {
-            System.out.println("Не позднее какого года выпуска должно быть авто?");
-            int year = scanner.nextInt();
-            System.out.println("Какой максимальный пробег?");
-            double mileage = scanner.nextDouble();
+            Calculator calculator = new Calculator();
             System.out.println("На какое время вы хотите арендовать авто?");
             double time = scanner.nextDouble();
-            double result = calculationOfTheAmount(car, year, mileage, time);
+            double result = calculator.calculationOfTheAmount(car, time);
             if (result == 0) {
                 System.out.println("Авто с такими характеристиками в прокате нет");
             } else {

@@ -1,7 +1,7 @@
 package Module10.Middle3.Cars;
 
 public interface CarInterface {
-    int ageCalculation(int year);
+    int ageCalculation();
 
     int getYear();
 
