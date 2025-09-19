@@ -36,8 +36,7 @@ public class LinkedList<T> implements List<T> {
     }
 
     public T get(int index) {
-        if (index < 0 || index > size) {
-            System.out.println("Элемента с данным индексом не существует");
+        if (!indexCheck(index)) {
             return null;
         }
         Node<T> result = first;
@@ -48,8 +47,7 @@ public class LinkedList<T> implements List<T> {
     }
 
     public T remove(int index) {
-        if (index < 0 || index > size) {
-            System.out.println("Элемента с данным индексом не существует");
+        if (!indexCheck(index)) {
             return null;
         }
         Node<T> result = first;
@@ -65,6 +63,15 @@ public class LinkedList<T> implements List<T> {
         result = null;
         size--;
         return value;
+    }
+
+    public boolean indexCheck(int index) {
+        boolean validIndex = true;
+        if (index < 0 || index >= size) {
+            System.out.println("Элемента с данным индексом не существует");
+            validIndex = false;
+        }
+        return validIndex;
     }
 
     public int size() {

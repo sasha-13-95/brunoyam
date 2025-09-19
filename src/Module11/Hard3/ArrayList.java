@@ -22,23 +22,30 @@ public class ArrayList<T> implements List<T> {
     }
 
     public T get(int index) {
-        if (index < 0 || index >= size) {
-            System.out.println("Элемента с данным индексом не существует");
-            return  null;
+        if (!indexCheck(index)) {
+            return null;
         }
         return (T) array[index];
     }
 
     public T remove(int index) {
-        if (index < 0 || index >= size) {
-            System.out.println("Элемента с данным индексом не существует");
-            return  null;
+        if (!indexCheck(index)) {
+            return null;
         }
         T value = (T) array[index];
         array[index] = null;
         size -= 1;
         array = Arrays.copyOf(array, array.length - 1);
         return value;
+    }
+
+    public boolean indexCheck(int index) {
+        boolean validIndex = true;
+        if (index < 0 || index >= size) {
+            System.out.println("Элемента с данным индексом не существует");
+            validIndex = false;
+        }
+        return validIndex;
     }
 
     public int size() {
