@@ -1,33 +1,16 @@
 package Module11.Hard1;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите целые числа через пробел");
-        String stringOfNumbers = scanner.nextLine();
-        String[] numbers = stringOfNumbers.split(" ");
-        TreeSet<Integer> treeSet = new TreeSet<>();
-        for (String number : numbers) {
-            treeSet.add(Integer.parseInt(number));
-        }
-        System.out.println("Введите целые числа через пробел");
-        String stringOfNumbers2 = scanner.nextLine();
-        String[] numbers2 = stringOfNumbers2.split(" ");
-        List<Integer> list = new ArrayList<>();
-        for (String number : numbers2) {
-            if (treeSet.contains(Integer.parseInt(number))) {
-                list.add(Integer.parseInt(number));
-            }
-            treeSet.add(Integer.parseInt(number));
-        }
-        for (int i : list) {
-            treeSet.remove(i);
-        }
-        System.out.println(treeSet);
+        Set<Integer> hashSet1 = new HashSet<>(Arrays.asList(1, 5, 7));
+        Set<Integer> hashSet2 = new HashSet<>(Arrays.asList(1, 6, 8));
+        Set<Integer> symmetricDifference = new HashSet<>(hashSet1);
+        symmetricDifference.addAll(hashSet2);
+        Set<Integer> intersection = new HashSet<>(hashSet1);
+        intersection.retainAll(hashSet2);
+        symmetricDifference.removeAll(intersection);
+        System.out.println(symmetricDifference);
     }
 }
