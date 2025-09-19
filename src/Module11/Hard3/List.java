@@ -6,4 +6,8 @@ public interface List<T> {
     public abstract T get(int index);
 
     public abstract T remove(int index);
+
+    public boolean indexCheck(int index);
+
+    public int size();
 }
