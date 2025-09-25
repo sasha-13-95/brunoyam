@@ -3,23 +3,20 @@ package Module12.Middle2;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Converter {
     final static List<String> UNITS = List.of("один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять");
     final static List<String> TEENS = List.of("десять", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадцать", "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать");
     final static List<String> TENS = List.of("", "", "двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят", "семьдесят", "восемьдесят", "девяносто");
-    static List<Integer> numbersInt = new ArrayList<>();
-    static List<String> numbersString = new ArrayList<>();
 
-    public static void readFile(BufferedReader bufferedReader) throws IOException {
+    public static void readFile(BufferedReader bufferedReader, List<Integer> numbersInt) throws IOException {
         while (bufferedReader.ready()) {
             numbersInt.add(Integer.parseInt(bufferedReader.readLine()));
         }
     }
 
-    public static void replaceNumbersWithWords() {
+    public static void replaceNumbersWithWords(List<Integer> numbersInt, List<String> numbersString) {
         for (int i = 0; i < numbersInt.size(); i++) {
             if (numbersInt.get(i) < 10) {
                 numbersString.add(UNITS.get(i));
@@ -41,7 +38,7 @@ public class Converter {
         }
     }
 
-    public static void writeToFile(PrintWriter printWriter) {
+    public static void writeToFile(PrintWriter printWriter, List<String> numbersString) {
         for (int i = 0; i < numbersString.size(); i++) {
             printWriter.println(numbersString.get(i));
         }
