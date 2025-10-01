@@ -12,7 +12,7 @@ public class Main {
                 System.out.println(myText);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
     }
 }
